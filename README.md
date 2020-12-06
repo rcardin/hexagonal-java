@@ -1,3 +1,5 @@
+![](https://github.com/rcardin/hexagonal-java/workflows/Hexagonal-Java/badge.svg)
+
 # Hexagonal Architecture
 
 This toy project shows how to implement a service using Spring Boot, and the Hexagonal Architecture. The

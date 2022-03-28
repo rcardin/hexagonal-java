@@ -3,7 +3,9 @@
 # Hexagonal Architecture
 
 This toy project shows how to implement a service using Spring Boot, and the Hexagonal Architecture. The
-represented domain model is the management of a **stocks' portfolio**.
+represented domain model is the management of a **stocks' portfolio**. The reference implementation is the project [hexagonal](https://github.com/rcardin/hexagonal).
+
+(STILL UNDER DEVELOPMENT)
 
 ## User Stories
 

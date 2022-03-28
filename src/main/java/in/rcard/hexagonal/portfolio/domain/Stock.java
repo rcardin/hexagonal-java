@@ -7,7 +7,7 @@ public class Stock {
   String name;
   long owned;
   
-  public Stock add(String name, Long owned) {
+  public Stock add(Long owned) {
     return new Stock(name, this.owned + owned);
   }
 }

@@ -1,11 +1,13 @@
 package in.rcard.hexagonal.portfolio.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Value;
 
-@AllArgsConstructor
-@Getter
+@Value
 public class Stock {
-  private final String name;
-  private final long owned;
+  String name;
+  long owned;
+  
+  public Stock add(String name, Long owned) {
+    return new Stock(name, this.owned + owned);
+  }
 }

@@ -10,9 +10,18 @@ public class Portfolio {
   Map<String, Stock> stocks;
   
   public Portfolio buy(String name, Long quantity) {
-    final Stock boughtStock = stocks.getOrDefault(name, new Stock(name, quantity));
+    final Stock boughtStock = getUpdatedStock(name, quantity);
     final Map<String, Stock> newStocks = new HashMap<>(stocks);
     newStocks.put(name, boughtStock);
-    return new Portfolio(name, newStocks);
+    return new Portfolio(this.name, newStocks);
+  }
+  
+  private Stock getUpdatedStock(String name, Long quantity) {
+    if (stocks.containsKey(name)) {
+      final Stock stock = stocks.get(name);
+      return stock.add(quantity);
+    } else {
+      return new Stock(name, quantity);
+    }
   }
 }

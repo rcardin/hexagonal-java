@@ -3,6 +3,15 @@ package in.rcard.hexagonal.portfolio.domain
 import spock.lang.Specification
 
 class PortfolioSpec extends Specification {
+
+    def "emptyPortfolio should create a portfolio without stocks"() {
+        when:
+            var emptyPortfolio = Portfolio.emptyPortfolio("portfolio")
+        then:
+            emptyPortfolio.name == "portfolio"
+            emptyPortfolio.stocks == [:]
+    }
+
     def "buy should add the given quantity of a stock if already owned"() {
         given:
             var appleStock = new Stock("AAPL", 500L)

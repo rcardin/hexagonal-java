@@ -28,7 +28,7 @@ public class PortfolioCreationService implements PortfolioCreationUseCase {
     final Optional<Portfolio> maybePortfolio = portfolioFindByNamePort.findByName(cmd.getName());
     if (maybePortfolio.isPresent()) {
       throw new IllegalArgumentException(
-          "Portfolio with name " + cmd.getName() + " already exists");
+          "Portfolio with name '" + cmd.getName() + "' already exists");
     }
   }
 }

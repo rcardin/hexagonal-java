@@ -7,6 +7,7 @@ import in.rcard.hexagonal.portfolio.domain.Portfolio
 import spock.lang.Specification
 
 class PortfolioCreationServiceSpec extends Specification {
+
     def "createPortfolio should thrown an IllegalArgumentException if the name in not unique"() {
         given:
         Portfolio portfolio = Portfolio.emptyPortfolio("portfolio")
@@ -26,5 +27,21 @@ class PortfolioCreationServiceSpec extends Specification {
         def exception = thrown(IllegalArgumentException)
         exception.message == "Portfolio with name 'portfolio' already exists"
         0 * portfolioCreationPort.createPortfolio(_)
+    }
+
+    def "createPortfolio should return true if the portfolio was successfully created"() {
+        given:
+        PortfolioCreationPort portfolioCreationPort = Stub()
+        portfolioCreationPort.createPortfolio(_ as Portfolio) >> true
+        PortfolioFindByNamePort portfolioFindByNamePort = Stub()
+        portfolioFindByNamePort.findByName("portfolio") >> Optional.empty()
+
+        PortfolioCreationService service =
+                new PortfolioCreationService(portfolioCreationPort, portfolioFindByNamePort)
+
+        expect:
+        service.createPortfolio(
+                new PortfolioCreationUseCase.PortfolioCreationCommand("portfolio")
+        )
     }
 }

@@ -12,9 +12,9 @@ class PortfolioCreationServiceSpec extends Specification {
         given:
         Portfolio portfolio = Portfolio.emptyPortfolio("portfolio")
         PortfolioCreationPort portfolioCreationPort = Mock()
-        PortfolioFindByNamePort portfolioFindByNamePort = Stub()
-        portfolioFindByNamePort.findByName("portfolio") >> Optional.of(portfolio)
-
+        PortfolioFindByNamePort portfolioFindByNamePort = Stub() {
+            findByName("portfolio") >> Optional.of(portfolio)
+        }
         PortfolioCreationService service =
                 new PortfolioCreationService(portfolioCreationPort, portfolioFindByNamePort)
 
@@ -31,10 +31,12 @@ class PortfolioCreationServiceSpec extends Specification {
 
     def "createPortfolio should return true if the portfolio was successfully created"() {
         given:
-        PortfolioCreationPort portfolioCreationPort = Stub()
-        portfolioCreationPort.createPortfolio(_ as Portfolio) >> true
-        PortfolioFindByNamePort portfolioFindByNamePort = Stub()
-        portfolioFindByNamePort.findByName("portfolio") >> Optional.empty()
+        PortfolioCreationPort portfolioCreationPort = Stub() {
+            createPortfolio(_ as Portfolio) >> true
+        }
+        PortfolioFindByNamePort portfolioFindByNamePort = Stub() {
+            findByName("portfolio") >> Optional.empty()
+        }
 
         PortfolioCreationService service =
                 new PortfolioCreationService(portfolioCreationPort, portfolioFindByNamePort)
